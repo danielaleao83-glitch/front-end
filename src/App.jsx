@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 
 const quotesData = [
   {
@@ -24,19 +24,12 @@ const quotesData = [
 ];
 
 function App() {
-  const [quote, setQuote] = useState({
-    text: "",
-    author: "",
-  });
+  const [quote, setQuote] = useState(quotesData[0]);
 
-  function getRandomQuote() {
-    const random = Math.floor(Math.random() * quotesData.length);
-    setQuote(quotesData[random]);
-  }
-
-  useEffect(() => {
-    getRandomQuote();
-  }, []);
+  const getRandomQuote = () => {
+    const randomIndex = Math.floor(Math.random() * quotesData.length);
+    setQuote(quotesData[randomIndex]);
+  };
 
   const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
     `"${quote.text}" - ${quote.author}`
@@ -45,26 +38,38 @@ function App() {
   return (
     <div id="wrapper">
       <div id="quote-box">
+
         <h1>Gerador de Frases</h1>
 
-        <p id="text">"{quote.text}"</p>
+        <p id="text">
+          "{quote.text}"
+        </p>
 
-        <p id="author">- {quote.author}</p>
+        <p id="author">
+          - {quote.author}
+        </p>
 
         <div className="actions">
+
           <a
             id="tweet-quote"
             href={twitterUrl}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Compartilhar frase no Twitter"
           >
             Tweetar
           </a>
 
-          <button id="new-quote" onClick={getRandomQuote}>
+          <button
+            id="new-quote"
+            onClick={getRandomQuote}
+          >
             Nova Frase
           </button>
+
         </div>
+
       </div>
     </div>
   );
