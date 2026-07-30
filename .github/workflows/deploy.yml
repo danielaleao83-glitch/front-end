@@ -24,11 +24,18 @@ jobs:
           node-version: 24
           cache: npm
 
-      - name: Instalar dependências
+      - name: Instalar dependencias
         run: npm ci
 
       - name: Fazer build
         run: npm run build
+
+      - name: Verificar dist
+        run: |
+          echo "=== dist/index.html ==="
+          cat dist/index.html
+          echo "=== arquivos ==="
+          find dist -maxdepth 2 -type f
 
       - name: Upload do artifact
         uses: actions/upload-pages-artifact@v3
