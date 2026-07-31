@@ -1,54 +1,251 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+}
+
+:root {
+  font-family:
+    Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+
+  color: #f8fafc;
+  background: #020617;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  min-height: 100%;
+  background: #020617;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.18), transparent 30%),
+    radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.18), transparent 30%),
+    linear-gradient(135deg, #020617, #0f172a 55%, #111827);
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
 }
 
 #wrapper {
   min-height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background: #1e293b;
+  justify-content: center;
+  padding: 32px 20px;
 }
 
 #quote-box {
-  width: 500px;
-  padding: 40px;
-  background: white;
-  border-radius: 15px;
+  width: min(100%, 760px);
+  padding: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+
+  animation: cardEnter 0.7s ease-out;
+}
+
+#quote-box h1 {
+  margin-bottom: 32px;
+
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+
+  background: linear-gradient(90deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 #text {
-  font-size: 24px;
-  margin: 30px 0;
+  margin: 0 auto;
+
+  max-width: 650px;
+
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  font-weight: 500;
+  line-height: 1.6;
+
+  color: #f8fafc;
 }
 
 #author {
-  font-size: 18px;
-  text-align: right;
-  color: #555;
+  margin-top: 24px;
+
+  font-size: 1.05rem;
+  font-weight: 600;
+
+  color: #94a3b8;
 }
 
 .actions {
   display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+
+  margin-top: 36px;
 }
 
-#tweet-quote,
-#new-quote {
-  padding: 12px 20px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  background: #2563eb;
-  color: white;
+#new-quote,
+#tweet-quote {
+  min-width: 150px;
+  padding: 14px 24px;
+
+  border-radius: 12px;
+
+  font-size: 0.98rem;
+  font-weight: 700;
+
   text-decoration: none;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+#new-quote {
+  border: none;
+
+  color: #ffffff;
+
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.28);
+}
+
+#tweet-quote {
+  border: 1px solid rgba(96, 165, 250, 0.35);
+
+  color: #bfdbfe;
+
+  background: rgba(37, 99, 235, 0.08);
 }
 
 #new-quote:hover,
 #tweet-quote:hover {
-  opacity: .8;
+  transform: translateY(-3px);
+}
+
+#new-quote:hover {
+  box-shadow: 0 15px 30px rgba(37, 99, 235, 0.4);
+}
+
+#tweet-quote:hover {
+  background: rgba(37, 99, 235, 0.18);
+  border-color: rgba(96, 165, 250, 0.6);
+}
+
+#new-quote:active,
+#tweet-quote:active {
+  transform: translateY(0);
+}
+
+#new-quote:focus-visible,
+#tweet-quote:focus-visible {
+  outline: 3px solid rgba(147, 197, 253, 0.8);
+  outline-offset: 4px;
+}
+
+/* Animação do cartão */
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Tablet */
+@media (max-width: 700px) {
+  #quote-box {
+    padding: 38px 28px;
+    border-radius: 24px;
+  }
+
+  #quote-box h1 {
+    margin-bottom: 26px;
+  }
+
+  #text {
+    font-size: 1.35rem;
+  }
+}
+
+/* Celular */
+@media (max-width: 480px) {
+  #wrapper {
+    padding: 20px 14px;
+  }
+
+  #quote-box {
+    padding: 32px 20px;
+    border-radius: 20px;
+  }
+
+  #quote-box h1 {
+    font-size: 2rem;
+  }
+
+  #text {
+    font-size: 1.2rem;
+    line-height: 1.55;
+  }
+
+  #author {
+    font-size: 0.95rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  #new-quote,
+  #tweet-quote {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* Reduz animações para usuários que preferem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
