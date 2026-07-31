@@ -22,8 +22,7 @@ const quotesData = [
     author: "Napoleon Hill",
   },
 ];
-
-function App() {
+function app() {
   const [quote, setQuote] = useState(quotesData[0]);
 
   const getRandomQuote = () => {
@@ -38,19 +37,13 @@ function App() {
   return (
     <div id="wrapper">
       <div id="quote-box">
-
         <h1>Gerador de Frases</h1>
 
-        <p id="text">
-          "{quote.text}"
-        </p>
+        <p id="text">"{quote.text}"</p>
 
-        <p id="author">
-          - {quote.author}
-        </p>
+        <p id="author">- {quote.author}</p>
 
         <div className="actions">
-
           <a
             id="tweet-quote"
             href={twitterUrl}
@@ -61,18 +54,13 @@ function App() {
             Tweetar
           </a>
 
-          <button
-            id="new-quote"
-            onClick={getRandomQuote}
-          >
+          <button id="new-quote" onClick={getRandomQuote}>
             Nova Frase
           </button>
-
         </div>
-
       </div>
     </div>
   );
 }
 
-export default App;
+export default app;
